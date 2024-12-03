@@ -6,7 +6,7 @@ class Profile(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     ]
-    username = models.CharField(max_length=255)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     # age = models.IntegerField()
     # faculty = models.CharField(max_length=150)

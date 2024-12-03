@@ -1,0 +1,23 @@
+# Базовый образ с Python
+FROM python:3.10-slim
+
+# Устанавливаем зависимости системы
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    && apt-get clean
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем файлы приложения в контейнер
+COPY . /app
+
+# Устанавливаем зависимости Python
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Открываем порт 8000 для сервера Django
+EXPOSE 8000
+
+# Команда для запуска сервера
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
