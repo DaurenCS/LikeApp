@@ -11,10 +11,13 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Копируем файлы приложения в контейнер
+COPY requirements.txt /app/
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
 COPY . /app
 
 # Устанавливаем зависимости Python
-RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Открываем порт 8000 для сервера Django
 EXPOSE 8000
